@@ -1,15 +1,42 @@
-import React from "react";
-import { useCookies } from "react-cookie";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Card from "../components/Card";
+import { useCookies } from "react-cookie";
 
 const Dashboard = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const [capsules, setCapsules] = useState([]); // State to store capsules
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const userId = localStorage.getItem("userId"); // Get userId from localStorage
+  const authToken = localStorage.getItem("AuthToken"); // Get AuthToken from localStorage
 
-  const userId = cookies.UserId;
+  useEffect(() => {
+    // Fetch user's capsules when the component mounts
+    const fetchCapsules = async () => {
+      if (!authToken) return; // Ensure authToken exists before making request
+
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/time-capsules",
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`, // Pass the token in the Authorization header
+            },
+          }
+        );
+        setCapsules(response.data.capsules); // Set the fetched capsules
+      } catch (error) {
+        console.error("Error fetching time capsules:", error);
+      }
+    };
+
+    if (userId && authToken) {
+      fetchCapsules(); // Fetch the capsules if userId and authToken exist
+    }
+  }, [userId, authToken]); // Trigger the effect when userId or authToken changes
 
   const handleCreateCapsuleClick = () => {
-    // Navigate to the CreateTimeCapsule page
     navigate("/create-time-capsule");
   };
 
@@ -37,10 +64,6 @@ const Dashboard = () => {
           >
             Create a New Capsule
           </button>
-          <button className="dashboard-btn manage-btn">
-            Manage Existing Capsules
-          </button>
-          {/* Add Logout Button */}
           <button
             className="dashboard-btn logout-btn"
             onClick={handleLogoutClick}
@@ -48,6 +71,19 @@ const Dashboard = () => {
             Logout
           </button>
         </div>
+
+        <div className="time-capsules-list">
+          {capsules.length === 0 ? (
+            <p>No time capsules found. Create one to get started!</p>
+          ) : (
+            <div className="card-list">
+              {capsules.map((capsule) => (
+                <Card key={capsule._id} data={capsule} />
+              ))}
+            </div>
+          )}
+        </div>
+
         <div className="dashboard-footer">
           <p>&copy; 2024 Time Capsule App. All Rights Reserved.</p>
         </div>

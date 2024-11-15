@@ -384,3 +384,190 @@ textarea:focus {
 .logout-btn:hover {
   background-color: #d43f3a;
 }
+
+/* TimeCapsule */
+
+.time-capsule-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.time-capsule-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-capsule-form label {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-textarea {
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input-datepicker,
+.input-timepicker {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-file {
+  margin-top: 8px;
+}
+
+.submit-button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* CSS styles for image previews */
+.image-previews {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.image-preview {
+  max-width: 150px; /* Limit the width of the image */
+  max-height: 150px; /* Limit the height of the image */
+  object-fit: contain; /* Ensure the image fits within the box without distortion */
+  border-radius: 8px; /* Optional: adds rounded corners for aesthetics */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+
+/* Card */
+
+/* Main card styling */
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  max-width: 320px;
+  margin: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  font-family: "Arial", sans-serif;
+  cursor: pointer; /* Make the card clickable */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Card header */
+.card-header {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Countdown display */
+.countdown {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+/* Hidden message text */
+.card-message {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+  opacity: 0; /* Initially hide the message */
+  transition: opacity 0.3s ease;
+}
+
+/* Reveal message once open */
+.card-message.revealed {
+  opacity: 1;
+}
+
+/* Dates and timestamps */
+.card-dates {
+  margin-top: 12px;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #777;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.timestamp strong {
+  color: #333;
+}
+
+/* Hidden Image previews */
+.card-files {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.file-preview {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  filter: blur(4px); /* Apply blur effect initially */
+  transition: filter 0.3s ease;
+}
+
+/* Remove blur and show message on open */
+.file-preview.revealed {
+  filter: blur(0px); /* Clear blur when open */
+}
+
+/* Footer button */
+.card-footer {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.view-details-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #0056b3;
+}
