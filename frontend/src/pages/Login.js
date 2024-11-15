@@ -19,6 +19,8 @@ const Login = () => {
       });
       const data = await response.json();
       if (data.token) {
+        localStorage.setItem("AuthToken", data.token);
+        localStorage.setItem("userId", data.userId);
         setCookie("AuthToken", data.token, { path: "/" });
         navigate("/dashboard");
       } else {

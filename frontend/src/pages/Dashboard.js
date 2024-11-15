@@ -42,6 +42,8 @@ const Dashboard = () => {
 
   const handleLogoutClick = () => {
     // Remove user-related cookies
+    localStorage.removeItem("AuthToken");
+    localStorage.removeItem("userId");
     removeCookie("UserId", { path: "/" });
     removeCookie("AuthToken", { path: "/" });
 
