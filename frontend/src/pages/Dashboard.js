@@ -88,6 +88,7 @@ const Dashboard = () => {
 
         <div className="dashboard-footer">
           <p>&copy; 2024 Time Capsule App. All Rights Reserved.</p>
+          <p>Made with ❤️ in Kochi.</p>
         </div>
       </div>
     </div>
