@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
   const [cookies, setCookie] = useCookies(["AuthToken"]);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     try {
       const response = await fetch("https://dearfutureme.onrender.com/login", {
         method: "POST",
@@ -28,6 +29,8 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -35,37 +38,44 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <h2 className="auth-title">Login</h2>
-        <form onSubmit={handleLogin} className="auth-form">
-          <div className="input-group">
-            <label htmlFor="email" className="input-label">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input-field"
-              required
-            />
+        {loading ? ( // Display loading message if loading is true
+          <div className="loading-screen">
+            <p>Loading...</p>
+            {/* You can add a spinner or animation here if you have one */}
           </div>
-          <div className="input-group">
-            <label htmlFor="password" className="input-label">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
-              required
-            />
-          </div>
-          <button type="submit" className="auth-button">
-            Login
-          </button>
-        </form>
+        ) : (
+          <form onSubmit={handleLogin} className="auth-form">
+            <div className="input-group">
+              <label htmlFor="email" className="input-label">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-field"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="password" className="input-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-field"
+                required
+              />
+            </div>
+            <button type="submit" className="auth-button">
+              Login
+            </button>
+          </form>
+        )}
         <div className="auth-footer">
           <span>
             Don't have an account?{" "}

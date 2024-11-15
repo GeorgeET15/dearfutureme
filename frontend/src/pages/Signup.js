@@ -5,10 +5,12 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the request starts
     try {
       const response = await fetch("https://dearfutureme.onrender.com/signup", {
         method: "POST",
@@ -23,56 +25,66 @@ const Signup = () => {
       }
     } catch (error) {
       console.error("Signup error:", error);
+    } finally {
+      setLoading(false); // Reset loading to false after the request completes
     }
   };
+
   return (
     <div className="auth-container">
       <div className="auth-card">
         <h2 className="auth-title">Sign Up</h2>
-        <form onSubmit={handleSignup} className="auth-form">
-          <div className="input-group">
-            <label htmlFor="email" className="input-label">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input-field"
-              required
-            />
+        {loading ? ( // Display loading message if loading is true
+          <div className="loading-screen">
+            <p>Loading...</p>
+            {/* You could add a spinner here if you have one */}
           </div>
-          <div className="input-group">
-            <label htmlFor="password" className="input-label">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="confirmPassword" className="input-label">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="input-field"
-              required
-            />
-          </div>
-          <button type="submit" className="auth-button">
-            Sign Up
-          </button>
-        </form>
+        ) : (
+          <form onSubmit={handleSignup} className="auth-form">
+            <div className="input-group">
+              <label htmlFor="email" className="input-label">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-field"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="password" className="input-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-field"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="confirmPassword" className="input-label">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="input-field"
+                required
+              />
+            </div>
+            <button type="submit" className="auth-button">
+              Sign Up
+            </button>
+          </form>
+        )}
         <div className="auth-footer">
           <span>
             Already have an account?{" "}
