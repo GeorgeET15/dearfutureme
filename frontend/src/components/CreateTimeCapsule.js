@@ -68,11 +68,15 @@ const CreateTimeCapsule = () => {
     };
 
     try {
-      await axios.post("http://localhost:8000/create-time-capsule", payload, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      await axios.post(
+        "https://dearfutureme.onrender.com/create-time-capsule",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       alert("Time capsule created successfully!");
       navigate("/dashboard");
     } catch (error) {

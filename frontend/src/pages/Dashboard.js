@@ -18,7 +18,7 @@ const Dashboard = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:8000/time-capsules",
+          "https://dearfutureme.onrender.com/time-capsules",
           {
             headers: {
               Authorization: `Bearer ${authToken}`, // Pass the token in the Authorization header
