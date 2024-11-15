@@ -98,7 +98,7 @@ cron.schedule("* * * * *", async () => {
 
 // Route for home
 app.get("/", (req, res) => {
-  res.json("Hello to my app");
+  res.json("Dear Future Me Backend");
 });
 
 // Signup Route
